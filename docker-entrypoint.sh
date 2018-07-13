@@ -388,6 +388,11 @@ else
 	exit 1
 fi
 
+if [ "${PARTITION_HANDLING:-}" ]; 
+then
+	rabbit_set_config 'cluster_partition_handling' ${PARTITION_HANDLING}
+fi
+
 combinedSsl='/tmp/combined.pem'
 if [ "$haveSslConfig" ] && [[ "$1" == rabbitmq* ]] && [ ! -f "$combinedSsl" ]; then
 	# Create combined cert
